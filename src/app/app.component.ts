@@ -6,12 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
-  badgeCount = 8;
-  viewMode: string;
   constructor() {}
-
-  setViewMode(viewMode: string) {
-    this.viewMode = viewMode;
-  }
-
 }
