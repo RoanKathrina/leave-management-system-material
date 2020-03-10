@@ -10,7 +10,6 @@
       <mat-form-field style="width: 100%">
         <mat-label>Username:</mat-label>
         <input matInput required formControlName="username" type="text" placeholder="Username">
-        <i class="material-icons">visibility</i>
         <mat-error *ngIf="(!loginForm.get('username').valid && loginForm.get('username').touched) || (!loginForm.get('username').valid && loginFormSubmitted)">
           Username is <strong>required</strong>
         </mat-error>      
