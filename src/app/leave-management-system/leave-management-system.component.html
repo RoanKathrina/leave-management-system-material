@@ -5,7 +5,7 @@
   </div>
   <div style="display: flex;">
     <p [matBadge]="badgeCount" matBadgePosition="after" matBadgeColor="warn" matBadgeOverlap=true [matMenuTriggerFor]="rootMenu" style="cursor: pointer">Menu</p>
-    <p>Logout</p>
+    <p style="cursor: pointer" (click)="onLogOut()">Logout</p>
   </div>
 </mat-toolbar>
 

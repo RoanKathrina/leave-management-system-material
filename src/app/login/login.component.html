@@ -9,7 +9,8 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <mat-form-field style="width: 100%">
         <mat-label>Username:</mat-label>
-        <input matInput required formControlName="username">
+        <input matInput required formControlName="username" type="text" placeholder="Username">
+        <i class="material-icons">visibility</i>
         <mat-error *ngIf="(!loginForm.get('username').valid && loginForm.get('username').touched) || (!loginForm.get('username').valid && loginFormSubmitted)">
           Username is <strong>required</strong>
         </mat-error>      
@@ -17,7 +18,7 @@
       <br />
       <mat-form-field style="width: 100%">
         <mat-label>Password:</mat-label>
-        <input matInput required formControlName="password">
+        <input matInput required formControlName="password" type="password">
         <mat-error *ngIf="(!loginForm.get('password').valid && loginForm.get('password').touched) || (!loginForm.get('password').valid && loginFormSubmitted)">
           Password is <strong>required</strong>
         </mat-error>      

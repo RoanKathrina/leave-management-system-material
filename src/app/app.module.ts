@@ -11,6 +11,8 @@ import { ApplyLeaveComponent } from './apply-leave/apply-leave.component';
 import { LeaveApplicationsStatusComponent } from './leave-applications-status/leave-applications-status.component';
 import { LoginComponent } from './login/login.component';
 import { LeaveManagementSystemComponent } from './leave-management-system/leave-management-system.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { AppService } from './app.service';
 
 @NgModule({
   imports:      [ BrowserModule,
@@ -24,7 +26,14 @@ import { LeaveManagementSystemComponent } from './leave-management-system/leave-
                   ApplyLeaveComponent,
                   LeaveApplicationsStatusComponent,
                   LoginComponent,
-                  LeaveManagementSystemComponent],
-  bootstrap:    [ AppComponent ]
+                  LeaveManagementSystemComponent,
+                  DialogComponent],
+  entryComponents: [
+                  DialogComponent
+  ],
+  bootstrap:    [ AppComponent ],
+  providers: [
+    AppService
+  ]
 })
 export class AppModule { }
