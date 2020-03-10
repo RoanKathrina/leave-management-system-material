@@ -1,22 +1,37 @@
 <mat-toolbar color="primary">
   <div style="display: flex;">
     <img src="https://www.pngjoy.com/pngl/131/2663889_group-of-people-icon-avatar-group-icon-png.png" style="height: 50px; margin-top: 10px;">
-    <p>Leave Management System</p>
+    <p style="font-weight: bold;">Leave Management System</p>
   </div>
-  <div style="display: flex;">
-    <p [matBadge]="badgeCount" matBadgePosition="after" matBadgeColor="warn" matBadgeOverlap=true [matMenuTriggerFor]="rootMenu" style="cursor: pointer">Menu</p>
-    <p style="cursor: pointer" (click)="onLogOut()">Logout</p>
+  <div style="display: flex; width: 80px; justify-content: space-between">
+    <mat-icon style="margin-top: 30px; font-size: 80px;" [matMenuTriggerFor]="rootMenu" style="cursor: pointer">list</mat-icon>
+    <mat-icon style="margin-top: 30px; font-size: 80px;" style="cursor: pointer" (click)="onLogOut()">exit_to_app</mat-icon>
+
+    <!-- <p [matBadge]="badgeCount" matBadgePosition="after" matBadgeColor="warn" matBadgeOverlap=true [matMenuTriggerFor]="rootMenu" style="cursor: pointer">Menu</p> -->
+    <!-- <p style="cursor: pointer" (click)="onLogOut()">Logout</p> -->
   </div>
 </mat-toolbar>
 
 <mat-menu #rootMenu="matMenu">
-  <button mat-menu-item [matMenuTriggerFor]="subMenu">Leaves</button>
+  <div style="display: flex">
+    <mat-icon style="margin-top: 10px; margin-left: 20px;" color="primary">supervisor_account</mat-icon>
+    <button mat-menu-item [matMenuTriggerFor]="subMenu">Leaves</button>
+  </div>
 </mat-menu>
 
 <mat-menu #subMenu="matMenu">
-  <button mat-menu-item (click)="setViewMode('leave_applications')">Leave Applications</button>
-  <button mat-menu-item (click)="setViewMode('apply_leave')">Apply Leave</button>
-  <button mat-menu-item (click)="setViewMode('leave_applications_status')">Leave Applications Status</button>
+  <div style="display: flex">
+    <mat-icon style="margin-top: 10px; margin-left: 20px;" color="primary">list_alt</mat-icon>
+    <button mat-menu-item (click)="setViewMode('leave_applications')">Leave Applications</button>
+  </div>
+  <div style="display: flex">
+    <mat-icon style="margin-top: 10px; margin-left: 20px;" color="primary">keyboard_backspace</mat-icon>
+    <button mat-menu-item (click)="setViewMode('apply_leave')">Apply Leave</button>
+  </div>
+  <div style="display: flex">
+    <mat-icon style="margin-top: 10px; margin-left: 20px;" color="primary">how_to_reg</mat-icon>
+    <button mat-menu-item (click)="setViewMode('leave_applications_status')">Leave Applications Status</button>
+  </div>
 </mat-menu>
 
 <ng-container *ngIf="viewMode == 'leave_applications'">

@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
 
       let member = this.members.members.find(item => item.username === username && item.password === password);
       if (member === undefined) {
-        this.dialog.open(DialogComponent, {data: {title: 'Invalid input', content: 'The Username, and Password does not exist in the Leave Management System.'}})
+        this.dialog.open(DialogComponent, {data: {title: 'Invalid input', content: 'The Username, and Password does not exist in the Leave Management System.', button_position: '210px', component: 'login'}})
       }
       else {
         // Check if Username === melody_anne_francisco
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
         }
       }
     } else {
-      return;
+        this.dialog.open(DialogComponent, {data: {title: 'Invalid input', content: 'Kindly input Username, or Password before logging in.', button_position: '150px', component: 'login'}})
     }
   }
 }

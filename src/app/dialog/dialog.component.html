@@ -1,7 +1,13 @@
-<h2 mat-dialog-title>{{data.title}}</h2>
+<h2 mat-dialog-title style="font-weight: bold;">{{data.title}}</h2>
 <mat-dialog-content style="font-size: 18px;">{{data.content}}</mat-dialog-content>
 <mat-dialog-actions>
-  <div>
-    <button mat-raised-button color="primary" mat-dialog-close style="width: 50%; margin-left: 210px;">OK</button>
+  <div style="display: flex" *ngIf="data.component == 'login'">
+    <button mat-raised-button color="primary" mat-dialog-close style="width: 50%;" [style.margin-left]="data.button_position">OK</button>
   </div>
+
+   <div style="display: flex; text-align: center" *ngIf="data.component == 'leave_applications'">
+    <button mat-raised-button color="primary" mat-dialog-close style="margin-left: 270px;" mat-dialog-close="yes">Yes</button>
+    <button mat-raised-button color="warn" mat-dialog-close mat-dialog-close="no">No</button>
+  </div>
+ 
 </mat-dialog-actions>

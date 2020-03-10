@@ -7,29 +7,35 @@
   </div>
   <mat-card style="margin-top: 80px; margin-left: 50px; width: 500px;">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <mat-form-field style="width: 100%">
-        <mat-label>Username:</mat-label>
-        <input matInput required formControlName="username" type="text" placeholder="Username">
-        <mat-error *ngIf="(!loginForm.get('username').valid && loginForm.get('username').touched) || (!loginForm.get('username').valid && loginFormSubmitted)">
-          Username is <strong>required</strong>
-        </mat-error>      
-      </mat-form-field>
+      <div style="display: flex">
+        <mat-icon style="font-size: 50px;" color="primary">account_circle</mat-icon>
+        <mat-form-field style="width: 100%; margin-left: 25px;">
+          <mat-label>Username:</mat-label>
+          <input matInput required formControlName="username" type="text" placeholder="Username">
+          <mat-error *ngIf="(!loginForm.get('username').valid && loginForm.get('username').touched) || (!loginForm.get('username').valid && loginFormSubmitted)">
+            Username is <strong>required</strong>
+          </mat-error>      
+        </mat-form-field>
+      </div>
       <br />
-      <mat-form-field style="width: 100%">
-        <mat-label>Password:</mat-label>
-        <input matInput required formControlName="password" type="password">
-        <mat-error *ngIf="(!loginForm.get('password').valid && loginForm.get('password').touched) || (!loginForm.get('password').valid && loginFormSubmitted)">
-          Password is <strong>required</strong>
-        </mat-error>      
-      </mat-form-field>
+      <div style="display: flex">
+        <mat-icon style="font-size: 50px;" color="primary">lock</mat-icon>
+        <mat-form-field style="width: 100%; margin-left: 25px;">
+          <mat-label>Password:</mat-label>
+          <input matInput required formControlName="password" type="password">
+          <mat-error *ngIf="(!loginForm.get('password').valid && loginForm.get('password').touched) || (!loginForm.get('password').valid && loginFormSubmitted)">
+            Password is <strong>required</strong>
+          </mat-error>      
+        </mat-form-field>
+      </div>
       <br />
       <br />
       <div style="text-align: center">
-        <button mat-raised-button color="primary" style="width: 100%; height: 50px; font-size: 18px;">Login</button>
+        <button mat-raised-button color="primary" style="width: 100%; height: 50px; font-size: 18px;">LOGIN</button>
         <br />
         <br />
         <p>Not yet a member?</p>
-        <button mat-raised-button color="primary" style="width: 100%; height: 50px; font-size: 18px;">Sign up</button>
+        <button mat-raised-button color="primary" style="width: 100%; height: 50px; font-size: 18px;">SIGN UP</button>
       </div>
     </form>
   </mat-card>
