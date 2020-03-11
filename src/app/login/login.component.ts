@@ -44,22 +44,24 @@ export class LoginComponent implements OnInit {
 
       let member = this.members.members.find(item => item.username === username && item.password === password);
       if (member === undefined) {
-        this.dialog.open(DialogComponent, {data: {title: 'Invalid input', content: 'The Username, and Password does not exist in the Leave Management System.', button_position: '210px', component: 'login'}})
+        this.dialog.open(DialogComponent, {data: {title: 'Invalid input', content: 'The Username, and Password does not exist in the Leave Management System.', button_position: '240px', component: 'login'}})
       }
       else {
         // Check if Username === melody_anne_francisco
         // If no, this.router.navigate(['../leave-management-system'], {relativeTo: this.route})
         // If yes, set the adminIsLoggedIn to true, navigate to this.router.navigate(['../leave_management_system'], {relativeTo: this.route})
         if (username !== 'melody_anne_francisco') {
+          this.service.user.next(username);
           this.router.navigate(['../leave-management-system'], {relativeTo: this.route});
         }
         else {
           this.service.adminIsLoggedIn.next(true);
+          this.service.user.next(username);
           this.router.navigate(['../leave-management-system'], {relativeTo: this.route});
         }
       }
     } else {
-        this.dialog.open(DialogComponent, {data: {title: 'Invalid input', content: 'Kindly input Username, or Password before logging in.', button_position: '150px', component: 'login'}})
+        this.dialog.open(DialogComponent, {data: {title: 'Invalid input', content: 'Kindly input Username, or Password before logging in.', button_position: '160px', component: 'login'}})
     }
   }
 }

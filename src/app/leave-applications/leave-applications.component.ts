@@ -20,8 +20,17 @@ export class LeaveApplicationsComponent implements OnInit {
               private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.dataSource = leaves.leaves;
+    const JSONObj = {
+      "leaves": []
+    }
+    if (window.sessionStorage.getItem('leaves') === null) {
+      window.sessionStorage.setItem('leaves', JSON.stringify(JSONObj));
+    }
     
+    else {
+      // leaves exists
+      this.dataSource = JSON.parse(window.sessionStorage.getItem('leaves')).leaves;//leaves.leaves;
+    }
   }
 
   applyFilter(event: Event) {

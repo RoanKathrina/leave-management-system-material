@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,6 +14,7 @@ export class ApplyLeaveComponent implements OnInit {
   applyLeaveForm: FormGroup;
   typeOfLeaves = ['Sick', 'Vacation', 'Maternity'];
   applyLeaveFormSubmitted: boolean = false;
+  @ViewChild('alForm', {static: false}) alForm;
   constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
@@ -49,7 +50,7 @@ export class ApplyLeaveComponent implements OnInit {
     }
   }
 
-  applyLeave() {
+  onSubmit() {
     this.applyLeaveFormSubmitted = true;
     if( this.applyLeaveForm.invalid === false) {
       // Valid Form
@@ -64,6 +65,8 @@ export class ApplyLeaveComponent implements OnInit {
       const toDate = this.applyLeaveForm.get('toDate').value;
       const numberOfDays = this.applyLeaveForm.get('numberOfDays').value;
       const reason = this.applyLeaveForm.get('reason').value;
+
+      const name = (firstName.replace(/ /g,"_") + '_' + lastName.replace(/ /g,"_")).toLowerCase();
 
       if (window.sessionStorage.getItem('leaves') === null) {
         // leaves is not yet existing
@@ -102,6 +105,10 @@ export class ApplyLeaveComponent implements OnInit {
         window.sessionStorage.setItem('leaves', JSON.stringify(JSONObj))
       }
       this.applyLeaveForm.reset();
+      this.alForm.resetForm();
+      // this.applyLeaveFormSubmitted = true;
+      // this.applyLeaveForm.markAsPristine();
+      // this.applyLeaveForm.markAsUntouched();
     }
     else {
       this.dialog.open(DialogComponent, {data: {title: 'Invalid Input', content: 'Kindly correct all invalid input/s before submitting.', button_position: '165px', component: 'apply_leave'}});

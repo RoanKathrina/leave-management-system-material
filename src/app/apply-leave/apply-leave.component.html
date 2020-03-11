@@ -1,6 +1,7 @@
+<div style="margin-left: 35%;">
   <h3 style="margin-left: 20px">New Leave Request</h3>
   <mat-card style="width: 500px; margin-left: 20px;">
-    <form [formGroup]="applyLeaveForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="applyLeaveForm" (ngSubmit)="onSubmit()" #alForm="ngForm">
       <mat-form-field style="width: 100%;">
         <mat-label>First Name:</mat-label>
         <input matInput required formControlName="firstName" type="text" placeholder="First Name">
@@ -73,8 +74,8 @@
       <br />
       <br />
 
-      <button mat-raised-button color="primary" style="width: 100%; height: 50px;" (click)="applyLeave()" type="reset">APPLY LEAVE</button>
+      <button mat-raised-button color="primary" style="width: 100%; height: 50px;" type="submit">APPLY LEAVE</button>
     </form>
-
-  </mat-card>
+  </mat-card>  
+</div>
 
