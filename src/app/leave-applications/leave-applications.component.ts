@@ -32,7 +32,6 @@ export class LeaveApplicationsComponent implements OnInit {
   approveLeave(element, position: number) {
     const dialogRef = this.dialog.open(DialogComponent, {data: {title: 'Confirmation Message', content: `Are you sure you want to allow member: ${element.first_name} ${element.last_name} to have ${element.type_of_leave} leave?`, button_position: '150px', component: 'leave_applications'}});
 
-    console.log('Table', this.table);
     dialogRef.afterClosed().subscribe(result => 
       {
         if(result === 'no') {
@@ -92,5 +91,63 @@ export class LeaveApplicationsComponent implements OnInit {
       }
     )
 
+  }
+
+  rejectLeave(element, position: number) {
+    const dialogRef = this.dialog.open(DialogComponent, {data: {title: 'Confirmation Message', content: `Are you sure you want to reject member: ${element.first_name} ${element.last_name} to have ${element.type_of_leave} leave?`, button_position: '150px', component: 'leave_applications'}});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'no') {
+        return;
+      }
+      else {
+        // Create JSONObj
+        // Save the JSONObj in the sessionStorage
+        // Remove the element in the leave_applications
+        const name = (element.first_name.replace(/ /g,"_") + '_' + element.last_name.replace(/ /g,"_")).toLowerCase();
+        let JSONObj;
+        if( window.sessionStorage.getItem(name) !== null) {
+          // roan_kathrina_dimaculangan already exists
+          JSONObj = {
+            "approved": [
+              ...JSON.parse(window.sessionStorage.getItem(name)).approved,
+            ],
+            "rejected": [
+              ...JSON.parse(window.sessionStorage.getItem(name)).rejected,
+              {
+                "first_name": element.first_name,
+                "last_name": element.last_name,
+                "type_of_leave": element.type_of_leave,
+                "from_date": element.from_date,
+                "to_date": element.to_date,
+                "number_of_days": element.number_of_days,
+                "reason": element.reason                  
+              }
+            ]
+          }
+          window.sessionStorage.setItem(name, JSON.stringify(JSONObj));
+        }
+        else {
+          JSONObj = {
+            "approved": [
+            ],
+            "rejected": [
+              {
+                "first_name": element.first_name,
+                "last_name": element.last_name,
+                "type_of_leave": element.type_of_leave,
+                "from_date": element.from_date,
+                "to_date": element.to_date,
+                "number_of_days": element.number_of_days,
+                "reason": element.reason                  
+              }
+            ]
+          }
+          window.sessionStorage.setItem(name, JSON.stringify(JSONObj));
+        }
+        this.dataSource.splice(position, 1);
+        this.table.renderRows();
+      }
+    })
   }
 }

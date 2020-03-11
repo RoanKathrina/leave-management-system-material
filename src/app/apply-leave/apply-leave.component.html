@@ -1,1 +1,80 @@
-  <p>apply-leave works</p>
+  <h3 style="margin-left: 20px">New Leave Request</h3>
+  <mat-card style="width: 500px; margin-left: 20px;">
+    <form [formGroup]="applyLeaveForm" (ngSubmit)="onSubmit()">
+      <mat-form-field style="width: 100%;">
+        <mat-label>First Name:</mat-label>
+        <input matInput required formControlName="firstName" type="text" placeholder="First Name">
+        <mat-error *ngIf="(!applyLeaveForm.get('firstName').valid && applyLeaveForm.get('firstName').touched) || (!applyLeaveForm.get('firstName').valid && applyLeaveFormSubmitted)">
+          First Name is <strong>required</strong>
+        </mat-error>      
+      </mat-form-field>
+      <br />
+
+      <mat-form-field style="width: 100%;">
+        <mat-label>Last Name: </mat-label>
+        <input matInput required formControlName="lastName" type="text" placeholder="Last Name">
+        <mat-error *ngIf="(!applyLeaveForm.get('lastName').valid && applyLeaveForm.get('lastName').touched) || (!applyLeaveForm.get('lastName').valid && applyLeaveFormSubmitted)">
+          Last Name is <strong>required</strong>
+        </mat-error>      
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%;">
+        <mat-label>Type of Leave</mat-label>
+        <mat-select formControlName="typeOfLeave" required>
+          <mat-option *ngFor="let leave of typeOfLeaves" [value]="leave">
+            {{leave}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="(!applyLeaveForm.get('typeOfLeave').valid && applyLeaveForm.get('typeOfLeave').touched) || (!applyLeaveForm.get('typeOfLeave').valid && applyLeaveFormSubmitted)">
+          Type of Leave is <strong>required</strong>
+        </mat-error>     
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%;">
+        <mat-label>From Date:</mat-label>
+        <input matInput [matDatepicker]="fromPicker" formControlName="fromDate" required>
+        <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fromPicker></mat-datepicker>
+        <mat-error *ngIf="(!applyLeaveForm.get('fromDate').valid && applyLeaveForm.get('fromDate').touched) || (!applyLeaveForm.get('fromDate').valid && applyLeaveFormSubmitted)">
+          From Date is <strong>required</strong>
+        </mat-error>     
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%;">
+        <mat-label>To Date:</mat-label>
+        <input matInput [matDatepicker]="toPicker" formControlName="toDate" required>
+        <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+        <mat-datepicker #toPicker></mat-datepicker>
+        <mat-error *ngIf="(!applyLeaveForm.get('toDate').valid && applyLeaveForm.get('toDate').touched) || (!applyLeaveForm.get('toDate').valid && applyLeaveFormSubmitted)">
+          To Date is <strong>required</strong>
+        </mat-error>     
+      </mat-form-field>
+      <br />
+      <br />
+
+      <div style="display: flex">
+        <mat-label style="white-space: nowrap">Number of Day/s:</mat-label>
+        <button mat-raised-button color="primary" style="margin-top: -10px; height: 40px; margin-left: 10px;" (click)="calculateNoOfDays()" type="button">CALCULATE</button>
+        <mat-form-field style="margin-top: -15px; margin-left: 10px; width: 270px;">
+          <input matInput required formControlName="numberOfDays" type="number" readonly=true>
+          <mat-error *ngIf="!applyLeaveForm.get('numberOfDays').valid && applyLeaveFormSubmitted">
+            Number of Day/s is <strong>required</strong>
+          </mat-error>     
+        </mat-form-field>
+      </div>
+
+      <mat-form-field style="width: 100%">
+        <mat-label>Reason:</mat-label>
+        <textarea matInput formControlName="reason" required></textarea>
+        <mat-error *ngIf="(!applyLeaveForm.get('reason').valid && applyLeaveForm.get('reason').touched) || (!applyLeaveForm.get('reason').valid && applyLeaveFormSubmitted)">
+          Reason is <strong>required</strong>
+        </mat-error>     
+      </mat-form-field>
+      <br />
+      <br />
+
+      <button mat-raised-button color="primary" style="width: 100%; height: 50px;" (click)="applyLeave()" type="reset">APPLY LEAVE</button>
+    </form>
+
+  </mat-card>
+
