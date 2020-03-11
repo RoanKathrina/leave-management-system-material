@@ -14,7 +14,7 @@ export class LeaveApplicationsComponent implements OnInit {
 
   displayedColumns: string[] = ['first_name', 'last_name', 'type_of_leave', 'from_date', 'to_date', 'number_of_days', 'reason', 'approve', 'reject'];
   dataSource;
-  @ViewChild(MatTable, {static: true}) table: MatTable<any>;
+  @ViewChild('table', {static: false}) table: MatTable<any>;
 
   constructor(private dialog: MatDialog,
               private cdr: ChangeDetectorRef) { }
@@ -32,6 +32,7 @@ export class LeaveApplicationsComponent implements OnInit {
   approveLeave(element, position: number) {
     const dialogRef = this.dialog.open(DialogComponent, {data: {title: 'Confirmation Message', content: `Are you sure you want to allow member: ${element.first_name} ${element.last_name} to have ${element.type_of_leave} leave?`, button_position: '150px', component: 'leave_applications'}});
 
+    console.log('Table', this.table);
     dialogRef.afterClosed().subscribe(result => 
       {
         if(result === 'no') {
@@ -61,6 +62,7 @@ export class LeaveApplicationsComponent implements OnInit {
               ]
             }
             window.sessionStorage.setItem(name, JSON.stringify(JSONObj));
+            console.log(JSONObj);
           } else {
             JSONObj = {
               "approved": [
@@ -78,6 +80,7 @@ export class LeaveApplicationsComponent implements OnInit {
               ]
             }
             window.sessionStorage.setItem(name, JSON.stringify(JSONObj));
+            console.log(JSONObj);
           }
           this.dataSource.splice(position, 1);
           this.table.renderRows();
