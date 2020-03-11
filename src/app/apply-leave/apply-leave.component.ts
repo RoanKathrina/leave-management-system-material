@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { Subscription } from 'rxjs';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-apply-leave',
@@ -14,11 +16,16 @@ export class ApplyLeaveComponent implements OnInit {
   applyLeaveForm: FormGroup;
   typeOfLeaves = ['Sick', 'Vacation', 'Maternity'];
   applyLeaveFormSubmitted: boolean = false;
+  userSubject: Subscription;
+  user: string;
   @ViewChild('alForm', {static: false}) alForm;
-  constructor(private dialog: MatDialog) { }
+
+  constructor(private dialog: MatDialog,
+              private service: AppService) { }
 
   ngOnInit() {
-    this.initForm();
+    this.userSubject = this.service.user.subscribe(userLoggedIn => this.user = userLoggedIn);
+    this.initForm();    
   }
 
   initForm() {
@@ -67,48 +74,52 @@ export class ApplyLeaveComponent implements OnInit {
       const reason = this.applyLeaveForm.get('reason').value;
 
       const name = (firstName.replace(/ /g,"_") + '_' + lastName.replace(/ /g,"_")).toLowerCase();
-
-      if (window.sessionStorage.getItem('leaves') === null) {
-        // leaves is not yet existing
-        JSONObj = {
-          "leaves": [
-            {
-              "first_name": firstName,
-              "last_name": lastName,
-              "type_of_leave": typeOfLeave,
-              "from_date": fromDate,
-              "to_date": toDate,
-              "number_of_days": numberOfDays,
-              "reason": reason
-            }
-          ]
-        }
-        console.log(JSONObj);
-        window.sessionStorage.setItem('leaves', JSON.stringify(JSONObj));
+      if (name !== this.user) {
+        this.dialog.open(DialogComponent, {data: {title: 'Invalid Input', content: 'Kindly input correct First Name, and Last Name.', button_position: '165px', component: 'apply_leave'}});
       }
       else {
-        JSONObj = {
-          "leaves": [
-            ...JSON.parse(window.sessionStorage.getItem('leaves')).leaves,
-            {
-              "first_name": firstName,
-              "last_name": lastName,
-              "type_of_leave": typeOfLeave,
-              "from_date": fromDate,
-              "to_date": toDate,
-              "number_of_days": numberOfDays,
-              "reason": reason
-            }
-          ]
+        if (window.sessionStorage.getItem('leaves') === null) {
+          // leaves is not yet existing
+          JSONObj = {
+            "leaves": [
+              {
+                "first_name": firstName,
+                "last_name": lastName,
+                "type_of_leave": typeOfLeave,
+                "from_date": fromDate,
+                "to_date": toDate,
+                "number_of_days": numberOfDays,
+                "reason": reason
+              }
+            ]
+          }
+          console.log(JSONObj);
+          window.sessionStorage.setItem('leaves', JSON.stringify(JSONObj));
         }
-        console.log(JSONObj);
-        window.sessionStorage.setItem('leaves', JSON.stringify(JSONObj))
+        else {
+          JSONObj = {
+            "leaves": [
+              ...JSON.parse(window.sessionStorage.getItem('leaves')).leaves,
+              {
+                "first_name": firstName,
+                "last_name": lastName,
+                "type_of_leave": typeOfLeave,
+                "from_date": fromDate,
+                "to_date": toDate,
+                "number_of_days": numberOfDays,
+                "reason": reason
+              }
+            ]
+          }
+          console.log(JSONObj);
+          window.sessionStorage.setItem('leaves', JSON.stringify(JSONObj))
+        }
+        this.applyLeaveForm.reset();
+        this.alForm.resetForm();
+        // this.applyLeaveFormSubmitted = true;
+        // this.applyLeaveForm.markAsPristine();
+        // this.applyLeaveForm.markAsUntouched();
       }
-      this.applyLeaveForm.reset();
-      this.alForm.resetForm();
-      // this.applyLeaveFormSubmitted = true;
-      // this.applyLeaveForm.markAsPristine();
-      // this.applyLeaveForm.markAsUntouched();
     }
     else {
       this.dialog.open(DialogComponent, {data: {title: 'Invalid Input', content: 'Kindly correct all invalid input/s before submitting.', button_position: '165px', component: 'apply_leave'}});

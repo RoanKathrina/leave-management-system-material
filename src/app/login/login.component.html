@@ -8,7 +8,7 @@
   <mat-card style="margin-top: 80px; margin-left: 50px; width: 500px;">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div style="display: flex">
-        <mat-icon style="font-size: 50px;" color="primary">account_circle</mat-icon>
+        <mat-icon style="font-size: 40px; margin-top: 10px;" color="primary">account_circle</mat-icon>
         <mat-form-field style="width: 100%; margin-left: 25px;">
           <mat-label>Username:</mat-label>
           <input matInput required formControlName="username" type="text" placeholder="Username">
@@ -19,7 +19,7 @@
       </div>
       <br />
       <div style="display: flex">
-        <mat-icon style="font-size: 50px;" color="primary">lock</mat-icon>
+        <mat-icon style="font-size: 40px; margin-top: 10px;" color="primary">lock</mat-icon>
         <mat-form-field style="width: 100%; margin-left: 25px;">
           <mat-label>Password:</mat-label>
           <input matInput required formControlName="password" type="password">

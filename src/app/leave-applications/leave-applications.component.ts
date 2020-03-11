@@ -14,6 +14,7 @@ export class LeaveApplicationsComponent implements OnInit {
 
   displayedColumns: string[] = ['first_name', 'last_name', 'type_of_leave', 'from_date', 'to_date', 'number_of_days', 'reason', 'approve', 'reject'];
   dataSource;
+  dataSourceSecond;
   @ViewChild('table', {static: false}) table: MatTable<any>;
 
   constructor(private dialog: MatDialog,
@@ -30,6 +31,7 @@ export class LeaveApplicationsComponent implements OnInit {
     else {
       // leaves exists
       this.dataSource = JSON.parse(window.sessionStorage.getItem('leaves')).leaves;//leaves.leaves;
+      this.dataSourceSecond = JSONObj;
     }
   }
 
