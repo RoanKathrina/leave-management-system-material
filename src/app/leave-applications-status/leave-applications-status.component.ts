@@ -17,7 +17,7 @@ export class LeaveApplicationsStatusComponent implements OnInit {
 
   ngOnInit() {
     this.userSubject = this.service.user.subscribe(userLoggedIn => this.user = userLoggedIn);
-    const JSONObj = [];
+    const JSONObj = {"approved": [], "rejected": []};
 
     if (this.user === null) {
       return;
@@ -27,7 +27,9 @@ export class LeaveApplicationsStatusComponent implements OnInit {
       console.log('Value of User', JSON.parse(window.sessionStorage.getItem(this.user)));
       if(window.sessionStorage.getItem(this.user) === null) {
         window.sessionStorage.setItem(this.user, JSON.stringify(JSONObj));
-        this.dataSource = JSON.parse(window.sessionStorage.getItem(this.user));
+        this.dataSource = [
+          ...JSON.parse(window.sessionStorage.getItem(this.user)).approved, 
+          ...JSON.parse(window.sessionStorage.getItem(this.user)).rejected,];
       }
       else {
         let tempList = [];
