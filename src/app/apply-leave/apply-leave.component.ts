@@ -78,6 +78,7 @@ export class ApplyLeaveComponent implements OnInit {
         this.dialog.open(DialogComponent, {data: {title: 'Invalid Input', content: 'Kindly input correct First Name, and Last Name.', button_position: '165px', component: 'apply_leave'}});
       }
       else {
+        console.log('Leaves', JSON.parse(window.sessionStorage.getItem('leaves')));
         if (window.sessionStorage.getItem('leaves') === null) {
           // leaves is not yet existing
           JSONObj = {

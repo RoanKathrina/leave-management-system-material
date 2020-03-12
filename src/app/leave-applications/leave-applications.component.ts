@@ -30,7 +30,7 @@ export class LeaveApplicationsComponent implements OnInit {
     
     else {
       // leaves exists
-      this.dataSource = JSON.parse(window.sessionStorage.getItem('leaves')).leaves;//leaves.leaves;
+      this.dataSource = JSON.parse(window.sessionStorage.getItem('leaves'));//leaves.leaves;
       this.dataSourceSecond = JSONObj;
     }
   }
@@ -92,7 +92,8 @@ export class LeaveApplicationsComponent implements OnInit {
             window.sessionStorage.setItem(name, JSON.stringify(JSONObj));
             console.log(JSONObj);
           }
-          this.dataSource.splice(position, 1);
+          this.dataSource.leaves.splice(position, 1);
+          window.sessionStorage.setItem('leaves', JSON.stringify(this.dataSource))
           this.table.renderRows();
           // this.cdr.detectChanges();
           // Create a JSONObj
@@ -156,7 +157,8 @@ export class LeaveApplicationsComponent implements OnInit {
           }
           window.sessionStorage.setItem(name, JSON.stringify(JSONObj));
         }
-        this.dataSource.splice(position, 1);
+        this.dataSource.leaves.splice(position, 1);
+        window.sessionStorage.setItem('leaves', JSON.stringify(this.dataSource));
         this.table.renderRows();
       }
     })

@@ -23,7 +23,39 @@ export class LeaveApplicationsStatusComponent implements OnInit {
       this.dataSource = JSON.parse(window.sessionStorage.getItem(this.user));
     }
     else {
-      const approved = JSON.parse(window.sessionStorage.getItem(this.user)).approved
+      let tempList = [];
+      let JSONObj;
+      const approved = JSON.parse(window.sessionStorage.getItem(this.user)).approved;
+      console.log(JSON.parse(window.sessionStorage.getItem(this.user)));
+      approved.forEach(item => {
+        JSONObj = {
+          "first_name": item.first_name,
+          "last_name": item.last_name,
+          "type_of_leave": item.type_of_leave,
+          "from_date": item.from_date,
+          "to_date": item.to_date,
+          "number_of_days": item.number_of_days,
+          "reason": item.reason,
+          "status": "Approved"
+        }
+        tempList.push(JSONObj);
+      })
+
+      const rejected = JSON.parse(window.sessionStorage.getItem(this.user)).rejected;
+      rejected.forEach(item => {
+        JSONObj = {
+          "first_name": item.first_name,
+          "last_name": item.last_name,
+          "type_of_leave": item.type_of_leave,
+          "from_date": item.from_date,
+          "to_date": item.to_date,
+          "number_of_days": item.number_of_days,
+          "reason": item.reason,
+          "status": "Rejected"
+        }
+        tempList.push(JSONObj);
+      })
+      this.dataSource = tempList;
       // this.dataSource = [
       //   ...JSON.parse(window.sessionStorage.getItem(this.user)).approved,
       //   ...JSON.parse(window.sessionStorage.getItem(this.user)).rejected
