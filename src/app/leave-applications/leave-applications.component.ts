@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatTable } from '@angular/material';
+import { AppService } from '../app.service';
+import { Subscription } from 'rxjs';
 
 import leaves from '../json/fs_bench_leave_applications.json';
 
@@ -14,24 +16,28 @@ export class LeaveApplicationsComponent implements OnInit {
 
   displayedColumns: string[] = ['first_name', 'last_name', 'type_of_leave', 'from_date', 'to_date', 'number_of_days', 'reason', 'approve', 'reject'];
   dataSource;
-  dataSourceSecond;
+  user;
+  userSubject: Subscription;
   @ViewChild('table', {static: false}) table: MatTable<any>;
 
   constructor(private dialog: MatDialog,
-              private cdr: ChangeDetectorRef) { }
+              private cdr: ChangeDetectorRef,
+              private service: AppService) { }
 
   ngOnInit() {
+    this.userSubject = this.service.user.subscribe(userLoggedIn => this.user = userLoggedIn);
+
     const JSONObj = {
       "leaves": []
     }
     if (window.sessionStorage.getItem('leaves') === null) {
       window.sessionStorage.setItem('leaves', JSON.stringify(JSONObj));
+      this.dataSource = window.sessionStorage.getItem('leaves');
     }
     
     else {
       // leaves exists
       this.dataSource = JSON.parse(window.sessionStorage.getItem('leaves'));//leaves.leaves;
-      this.dataSourceSecond = JSONObj;
     }
   }
 

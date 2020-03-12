@@ -21,8 +21,8 @@
 
 <mat-menu #subMenu="matMenu">
   <div style="display: flex">
-    <mat-icon style="margin-top: 10px; margin-left: 20px;" color="primary">list_alt</mat-icon>
-    <button mat-menu-item (click)="setViewMode('leave_applications')">Leave Applications</button>
+    <mat-icon style="margin-top: 10px; margin-left: 20px;" color="primary" [style.opacity]="adminIsLoggedIn === false ? '0.5' : '1'">list_alt</mat-icon>
+    <button mat-menu-item (click)="setViewMode('leave_applications')" [disabled]="!adminIsLoggedIn">Leave Applications</button>
   </div>
   <div style="display: flex">
     <mat-icon style="margin-top: 10px; margin-left: 20px;" color="primary">keyboard_backspace</mat-icon>

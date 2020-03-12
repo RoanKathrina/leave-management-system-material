@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AppService } from '../app.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-leave-management-system',
@@ -9,10 +11,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LeaveManagementSystemComponent implements OnInit {
   badgeCount = 8;
   viewMode: string;
+  adminIsLoggedInSubject: Subscription;
+  adminIsLoggedIn;
   constructor(private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private service: AppService) { }
 
   ngOnInit() {
+    this.adminIsLoggedInSubject = this.service.adminIsLoggedIn.subscribe(adminIsLoggedIn => this.adminIsLoggedIn = adminIsLoggedIn);
   }
 
   setViewMode(viewMode: string) {

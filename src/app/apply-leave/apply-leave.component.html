@@ -1,4 +1,8 @@
-<div style="margin-left: 35%;">
+<div style="text-align: center;" *ngIf="user === null">
+  <h3 style="color: red">Kindly login to view this page.</h3>
+</div>
+
+<div style="margin-left: 35%;" *ngIf="user !== null">
   <h3 style="margin-left: 20px">New Leave Request</h3>
   <mat-card style="width: 500px; margin-left: 20px;">
     <form [formGroup]="applyLeaveForm" (ngSubmit)="onSubmit()" #alForm="ngForm">

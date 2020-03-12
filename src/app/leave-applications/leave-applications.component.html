@@ -1,7 +1,12 @@
-<div style="margin-left: 15%; height: 500px; overflow-y: scroll">
-  <h3 style="margin-left: 20px;">Leave Application/s of FS Bench Member/s</h3>
+<div style="text-align: center;" *ngIf="(user === null) || (user !== null && user !== 'melody_anne_francisco')">
+  <h3 style="color: red">You are not authorized to view this page. Kindly log in as Administrator.</h3>
+</div>
 
-  <table mat-table #table [dataSource]="dataSource.leaves" class="mat-elevation-z8" style="margin-top: 0px; margin-left: 20px;" >
+<div style="margin-left: 15%; height: 500px; overflow-y: scroll" *ngIf="user !== null && user === 'melody_anne_francisco'">
+  <h3 style="margin-left: 20px;">Leave Application/s of FS Bench Member/s</h3>
+  <h3 style="margin-left: 500px; color: red">No item/s to display.</h3>
+
+  <table mat-table #table [dataSource]="dataSource.leaves" class="mat-elevation-z8" style="margin-top: 0px; margin-left: 20px;" *ngIf="dataSource.leaves.length !== 0">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
