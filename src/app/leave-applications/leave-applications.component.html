@@ -1,7 +1,3 @@
-<div style="text-align: center;" *ngIf="(user === null) || (user !== null && user !== 'melody_anne_francisco')">
-  <h3 style="color: red">You are not authorized to view this page. Kindly log in as Administrator.</h3>
-</div>
-
 <div style="margin-left: 15%; height: 500px; overflow-y: scroll" *ngIf="user !== null && user === 'melody_anne_francisco'">
   <h3 style="margin-left: 20px;">Leave Application/s of FS Bench Member/s</h3>
   <h3 style="margin-left: 500px; color: red" *ngIf="dataSource.leaves.length === 0">No item/s to display.</h3>

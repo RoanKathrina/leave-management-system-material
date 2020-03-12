@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./leave-management-system.component.css']
 })
 export class LeaveManagementSystemComponent implements OnInit {
-  badgeCount = 8;
+  badgeCount = 8; 
   viewMode: string;
   adminIsLoggedInSubject: Subscription;
   adminIsLoggedIn;
@@ -26,6 +26,7 @@ export class LeaveManagementSystemComponent implements OnInit {
   }
 
   onLogOut() {
+    this.service.adminIsLoggedIn.next(false);
     this.router.navigate(['../login'], {relativeTo: this.route});
   }
 
