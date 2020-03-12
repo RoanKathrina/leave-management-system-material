@@ -21,6 +21,11 @@
 
 <mat-menu #subMenu="matMenu">
   <div style="display: flex">
+    <mat-icon style="margin-top: 10px; margin-left: 20px;" color="primary">home</mat-icon>
+    <button mat-menu-item (click)="setViewMode('home')">Home</button>
+  </div>
+
+  <div style="display: flex">
     <mat-icon style="margin-top: 10px; margin-left: 20px;" color="primary" [style.opacity]="adminIsLoggedIn === false ? '0.5' : '1'">list_alt</mat-icon>
     <button mat-menu-item (click)="setViewMode('leave_applications')" [disabled]="!adminIsLoggedIn">Leave Applications</button>
   </div>
@@ -33,6 +38,11 @@
     <button mat-menu-item (click)="setViewMode('leave_applications_status')">Leave Applications Status</button>
   </div>
 </mat-menu>
+
+<ng-container *ngIf="viewMode == 'home'">
+  <app-home></app-home>
+</ng-container>
+
 
 <ng-container *ngIf="viewMode == 'leave_applications'">
   <app-leave-applications></app-leave-applications>

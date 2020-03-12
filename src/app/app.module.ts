@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { LeaveManagementSystemComponent } from './leave-management-system/leave-management-system.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { AppService } from './app.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports:      [ BrowserModule,
@@ -27,7 +28,8 @@ import { AppService } from './app.service';
                   LeaveApplicationsStatusComponent,
                   LoginComponent,
                   LeaveManagementSystemComponent,
-                  DialogComponent],
+                  DialogComponent,
+                  HomeComponent],
   entryComponents: [
                   DialogComponent
   ],
