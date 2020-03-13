@@ -3,7 +3,8 @@
     <img src="https://www.pngjoy.com/pngl/131/2663889_group-of-people-icon-avatar-group-icon-png.png" style="height: 50px; margin-top: 10px;">
     <p style="font-weight: bold;">Leave Management System</p>
   </div>
-  <div style="display: flex; width: 80px; justify-content: space-between">
+  <div style="display: flex; width: 150px; justify-content: space-between">
+    <mat-icon style="margin-top: 30px; font-size: 80px;" style="cursor: pointer" (click)="setViewMode('home')">home</mat-icon>
     <mat-icon style="margin-top: 30px; font-size: 80px;" [matMenuTriggerFor]="rootMenu" style="cursor: pointer">list</mat-icon>
     <mat-icon style="margin-top: 30px; font-size: 80px;" style="cursor: pointer" (click)="onLogOut()">exit_to_app</mat-icon>
 
@@ -21,11 +22,6 @@
 
 <mat-menu #subMenu="matMenu">
   <div style="display: flex">
-    <mat-icon style="margin-top: 10px; margin-left: 20px;" color="primary">home</mat-icon>
-    <button mat-menu-item (click)="setViewMode('home')">Home</button>
-  </div>
-
-  <div style="display: flex">
     <mat-icon style="margin-top: 10px; margin-left: 20px;" color="primary" [style.opacity]="adminIsLoggedIn === false ? '0.5' : '1'">list_alt</mat-icon>
     <button mat-menu-item (click)="setViewMode('leave_applications')" [disabled]="!adminIsLoggedIn">Leave Applications</button>
   </div>
@@ -42,7 +38,6 @@
 <ng-container *ngIf="viewMode == 'home'">
   <app-home></app-home>
 </ng-container>
-
 
 <ng-container *ngIf="viewMode == 'leave_applications'">
   <app-leave-applications></app-leave-applications>

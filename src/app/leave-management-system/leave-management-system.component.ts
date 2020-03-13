@@ -19,6 +19,7 @@ export class LeaveManagementSystemComponent implements OnInit {
 
   ngOnInit() {
     this.adminIsLoggedInSubject = this.service.adminIsLoggedIn.subscribe(adminIsLoggedIn => this.adminIsLoggedIn = adminIsLoggedIn);
+    this.viewMode = 'home';
   }
 
   setViewMode(viewMode: string) {
