@@ -39,6 +39,8 @@ export class LeaveApplicationsComponent implements OnInit {
       // leaves exists
       this.dataSource = JSON.parse(window.sessionStorage.getItem('leaves'));//leaves.leaves;
     }
+
+    console.log(this.dataSource);
   }
 
   applyFilter(event: Event) {

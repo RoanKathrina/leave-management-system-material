@@ -48,8 +48,8 @@ export class ApplyLeaveComponent implements OnInit {
       this.dialog.open(DialogComponent, {data: {title: 'Invalid Input', content: 'Kindly input From Date, or To Date before calculating.', button_position: '165px', component: 'apply_leave'}});
     }
     else {
-      const firstDate = moment(this.applyLeaveForm.get('fromDate').value);
-      const secondDate = moment(this.applyLeaveForm.get('toDate').value);
+      const firstDate = moment((this.applyLeaveForm.get('fromDate').value).toISOString());
+      const secondDate = moment((this.applyLeaveForm.get('toDate').value).toISOString());
       const diffInDays = Math.abs(firstDate.diff(secondDate, 'days')) + 1; 
       this.applyLeaveForm.patchValue({
         'numberOfDays': diffInDays
@@ -68,8 +68,8 @@ export class ApplyLeaveComponent implements OnInit {
       const firstName = this.applyLeaveForm.get('firstName').value;
       const lastName = this.applyLeaveForm.get('lastName').value;
       const typeOfLeave = this.applyLeaveForm.get('typeOfLeave').value;
-      const fromDate = this.applyLeaveForm.get('fromDate').value;
-      const toDate = this.applyLeaveForm.get('toDate').value;
+      const fromDate = this.applyLeaveForm.get('fromDate').value.toISOString();
+      const toDate = this.applyLeaveForm.get('toDate').value.toISOString();
       const numberOfDays = this.applyLeaveForm.get('numberOfDays').value;
       const reason = this.applyLeaveForm.get('reason').value;
 
