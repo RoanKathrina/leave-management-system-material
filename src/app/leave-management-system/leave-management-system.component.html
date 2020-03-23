@@ -3,10 +3,19 @@
     <img src="https://www.pngjoy.com/pngl/131/2663889_group-of-people-icon-avatar-group-icon-png.png" style="height: 50px; margin-top: 10px;">
     <p style="font-weight: bold;">Leave Management System</p>
   </div>
-  <div style="display: flex; width: 150px; justify-content: space-between">
-    <mat-icon style="margin-top: 30px; font-size: 80px;" style="cursor: pointer" (click)="setViewMode('home')">home</mat-icon>
-    <mat-icon style="margin-top: 30px; font-size: 80px;" [matMenuTriggerFor]="rootMenu" style="cursor: pointer">list</mat-icon>
-    <mat-icon style="margin-top: 30px; font-size: 80px;" style="cursor: pointer" (click)="onLogOut()">exit_to_app</mat-icon>
+  <div style="display: flex; width: 300px; justify-content: space-between">
+    <button mat-button>
+      <mat-icon style="margin-top: 30px; font-size: 80px;" style="cursor: pointer" (click)="setViewMode('home')">home</mat-icon>
+      <b> Home</b>
+    </button>
+    <button mat-button>
+      <mat-icon style="margin-top: 30px; font-size: 80px;" [matMenuTriggerFor]="rootMenu" style="cursor: pointer">list</mat-icon>
+      <b> Menu</b>
+    </button>
+    <button mat-button>
+      <mat-icon style="margin-top: 30px; font-size: 80px;" style="cursor: pointer" (click)="onLogOut()">exit_to_app</mat-icon>
+      <b> Log Out</b>
+    </button>
 
     <!-- <p [matBadge]="badgeCount" matBadgePosition="after" matBadgeColor="warn" matBadgeOverlap=true [matMenuTriggerFor]="rootMenu" style="cursor: pointer">Menu</p> -->
     <!-- <p style="cursor: pointer" (click)="onLogOut()">Logout</p> -->
